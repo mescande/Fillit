@@ -6,7 +6,7 @@
 #    By: mescande <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/02 11:37:26 by mescande          #+#    #+#              #
-#    Updated: 2019/05/04 12:39:49 by mescande         ###   ########.fr        #
+#    Updated: 2019/05/04 19:15:17 by mescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ INC_DIR = ./\
 		  ./libft/
 SRC_LIST = main.c\
 		   verif_file.c\
+		   get_next_line.c\
 		   fillit.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
@@ -30,7 +31,8 @@ INC = $(INC_DIR:%=-I %)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $^ -o $@
+	$(MAKE) -C libft/
+	$(CC) $(FLAGS) $^ -o $@ libft/libft.a
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(DIR)
 	$(CC) $(FLAGS) -MMD -c $< -o $@ $(INC)
@@ -40,9 +42,11 @@ $(DIR):
 
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) clean -C libft/
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) fclean -C libft/
 
 re: fclean
 	$(MAKE)

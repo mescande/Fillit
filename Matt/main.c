@@ -6,25 +6,32 @@
 /*   By: mescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 12:08:33 by mescande          #+#    #+#             */
-/*   Updated: 2019/05/04 12:19:26 by mescande         ###   ########.fr       */
+/*   Updated: 2019/05/04 20:58:25 by mescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-void	ft_putstrtr(char **str)
+char	**ft_makeitprintable(char **str)
 {
-	while (*str != 0)
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	printf("bouh\n");
+	while (i != 4)
 	{
-		while (**str != 0)
+		while (j != 4)
 		{
-			write(1, *str, 1);
-			(*str)++;
+		   str[i][j]	+= '0';
+		   write(1, str[i] + j++, 1);
 		}
 		write(1, "\n", 1);
-		str++;
+		i++;
 	}
-	return ;
+	return (str);
 }
 
 int		init_fun(char *file)
@@ -33,10 +40,11 @@ int		init_fun(char *file)
 	char	**tab;
 
 	fd = open(file, O_RDONLY);
-	if ((tab = verif_file(fd)))
+	if (!(tab = verif_file(fd)))
 		return (1);
 	close(fd);
-	if ((tab = fillit(tab)))
+	tab = ft_makeitprintable(tab);
+	if (!(tab = fillit(tab)))
 		return (1);
 	ft_putstrstr(tab);
 	return (0);

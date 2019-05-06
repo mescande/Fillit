@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mescande <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: thallot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/02 12:08:56 by mescande          #+#    #+#             */
-/*   Updated: 2019/05/04 12:25:21 by mescande         ###   ########.fr       */
+/*   Created: 2019/04/08 09:47:10 by thallot           #+#    #+#             */
+/*   Updated: 2019/04/19 10:47:24 by thallot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
-
 #include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
 #include "libft.h"
 
-void	ft_putstrstr(char **str);
-int		init_fun(char *file);
-int		main(int ac, char **av);
-
-char	**verif_file(int fd);
-
-char	**fillit(char **tab);
-
-#endif
+void	ft_putstr(char const *str)
+{
+	if (str)
+		write(1, str, ft_strlen(str));
+}
