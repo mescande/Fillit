@@ -6,7 +6,7 @@
 #    By: thallot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 14:51:59 by thallot           #+#    #+#              #
-#    Updated: 2019/05/06 11:41:56 by thallot          ###   ########.fr        #
+#    Updated: 2019/05/24 11:51:49 by mescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	@make -C libft
 	@$(CC) $(OBJECTS) libft/libft.a -o $(NAME)
-	@make clean -C libft
 	@echo "$(_GREEN)[OK] $(_BLUE)Compilation de $(_WHITE)$(NAME)"
 
 %.o: %.c
@@ -51,7 +50,7 @@ $(NAME): $(OBJECTS)
 
 clean:
 	@rm -rf $(OBJECTS)
-	@echo "$(_GREEN)[OK]$(_RED) Supression de tous les objets"
+	@make clean -C libft
 
 fclean: clean
 	@rm -rf $(NAME) $(EXE)

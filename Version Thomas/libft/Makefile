@@ -6,7 +6,7 @@
 #    By: thallot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 14:51:59 by thallot           #+#    #+#              #
-#    Updated: 2019/04/09 15:41:31 by thallot          ###   ########.fr        #
+#    Updated: 2019/05/24 12:02:45 by mescande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,18 +103,17 @@ SRC= ft_memset.c \
 
 OBJECTS	= $(SRC:.c=.o)
 
-.PHONY: clean fclean re all
-
 all: $(NAME)
 $(NAME): $(OBJECTS)
 	@echo "$(_GREEN)[OK] $(_BLUE)Tous les objets sont generes\r"
-	@ar rc $(NAME) $(OBJECTS) || printf "\n$(_RED)[ERREUR]$(_GRAY) Une est erreur est survenue $(_WHITE)$(NAME)\n"
-	@ranlib $(NAME)
+	@ar rcs $(NAME) $(OBJECTS) || printf "\n$(_RED)[ERREUR]$(_GRAY) Une est erreur est survenue $(_WHITE)$(NAME)\n"
 	@echo "$(_GREEN)[OK] $(_BLUE)Compilation de $(_WHITE)$(NAME)"
 
 %.o: %.c
 	@$(CC) $(CFLAGS)  -o $@ -c $< && printf "$(_GREEN)[OK] $(_BLUE)Generation de $(_WHITE)%-50s\r" "$@" || \
 		(echo "$(_RED)[ERREUR]$(_GRAY) Une est erreur est survenue sur $(_WHITE)$<$(_RED), $(_WHITE)$(NAME)$(_RED) non compilé(e)\n" && $(MAKE) fclean && exit 1)
+
+.PHONY: clean fclean re all
 
 clean:
 	@rm -rf $(OBJECTS)
